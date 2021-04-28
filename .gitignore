@@ -1,3 +1,9 @@
+/lib
+ctestfmk
+
+# vsc
+/.vscode
+
 # Prerequisites
 *.d
 
