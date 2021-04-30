@@ -7,7 +7,7 @@
 #include "ctestfmk.h"
 
 void insertList(TestFunctionList *list, const char *name, TestFunction function);
-long get_memory_usage();
+long getMemoryUsage();
 
 TestSuite *createTestSuite(const char *name)
 {
@@ -19,7 +19,7 @@ TestSuite *createTestSuite(const char *name)
     empty_test_suite->nb_tests = 0;
     empty_test_suite->nb_asserts = 0;
     empty_test_suite->execution_time = 0;
-    empty_test_suite->memory_usage = get_memory_usage();
+    empty_test_suite->memory_usage = getMemoryUsage();
     empty_test_suite->functions = empty_list;
 
     return empty_test_suite;
@@ -114,13 +114,19 @@ void insertList(TestFunctionList *list, const char *name, TestFunction function)
     }
 }
 
-void addTestFunctionAssert(TestFunctionNode* function_node, bool in_success, char *error_message)
+void addTestFunctionAssert(TestFunctionNode* function_node, char *file, int line, bool in_success, char *error_message)
 {
     char *message;
     message = (char *) malloc(strlen(error_message)+1);
     strcpy(message, error_message);
 
+    char *filename;
+    filename = (char *) malloc(strlen(file)+1);
+    strcpy(filename, file);
+
     TestFunctionAssertNode *node = (TestFunctionAssertNode *) malloc(sizeof(TestFunctionAssertNode));
+    node->file = filename;
+    node->line = line;
     node->in_success = in_success;
     node->error_message = message;
     node->next = NULL;
@@ -176,6 +182,8 @@ void displayTestSuite(TestSuite *suite)
         printf("  - Number of asserts: %i\n", current_node->nb_asserts);
         TestFunctionAssertNode *current_assert_node = current_node->assert_functions.first_node;
         while (current_assert_node != NULL) {
+            printf("   * File call name: %s\n", current_assert_node->file);
+            printf("   * File call line: %i\n", current_assert_node->line);
             printf("   * In success: %s\n", current_assert_node->in_success ? "YES" : "NO");
             printf("   * Error message: %s\n", current_assert_node->error_message);
             current_assert_node = current_assert_node->next;
@@ -184,7 +192,7 @@ void displayTestSuite(TestSuite *suite)
     }
 }
 
-long get_memory_usage()
+long getMemoryUsage()
 {
     struct rusage r_usage;
     int ret = getrusage(RUSAGE_SELF,&r_usage);

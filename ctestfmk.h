@@ -11,6 +11,8 @@
 typedef void (* TestFunction)(const void*); // Test function pointer
 
 typedef struct _TestFunctionAssertNode {
+    char *file;
+    int line;
     bool in_success;
     char *error_message;
     struct _TestFunctionAssertNode *next;
@@ -52,15 +54,22 @@ void runTestSuite(TestSuite*);
 void displayTestSuite(TestSuite*);
 void deleteTestSuite(TestSuite*);
 
-void addTestFunctionAssert(TestFunctionNode*, bool, char*);
+void addTestFunctionAssert(TestFunctionNode*, char*, int, bool, char*);
 
 // ***** Asserts *****
 
-void assertEqualsInt(int, int, const void*);
-void assertEqualsDouble(double, double, const void*);
-void assertEqualsChar(char, char, const void*);
-void assertEqualsCharP(char*, char*, const void*);
-void assertTrue(bool, const void*);
-void assertFalse(bool, const void*);
+void assertEqualsInt(int, int, const void*, char*, int);
+void assertEqualsDouble(double, double, const void*, char*, int);
+void assertEqualsChar(char, char, const void*, char*, int);
+void assertEqualsCharP(char*, char*, const void*, char*, int);
+void assertTrue(bool, const void*, char*, int);
+void assertFalse(bool, const void*, char*, int);
+
+#define assert_eaquals_int(expected, actual, function_node) assertEqualsInt(expected, actual, function_node, __FILE__, __LINE__)
+#define assert_eaquals_double(expected, actual, function_node) assertEqualsDouble(expected, actual, function_node, __FILE__, __LINE__)
+#define assert_eaquals_char(expected, actual, function_node) assertEqualsChar(expected, actual, function_node, __FILE__, __LINE__)
+#define assert_eaquals_charp(expected, actual, function_node) assertEqualsCharP(expected, actual, function_node, __FILE__, __LINE__)
+#define assert_true(actual, function_node) assertTrue(actual, function_node, __FILE__, __LINE__)
+#define assert_false(actual, function_node) assertFalse(actual, function_node, __FILE__, __LINE__)
 
 #endif
