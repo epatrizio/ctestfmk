@@ -49,7 +49,7 @@ typedef struct {
 TestSuite *createTestSuite(const char*);
 
 void addTestFunction(TestSuite*, const char*, TestFunction);
-void runTestSuite(TestSuite*);
+void runTestSuite(TestSuite*, int, char*[]);
 
 void displayTestSuite(TestSuite*);
 void deleteTestSuite(TestSuite*);

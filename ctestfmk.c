@@ -41,8 +41,11 @@ void runTestFunction(TestFunctionNode *function_node)
     function_node->execution_time = (double)(end - begin) / CLOCKS_PER_SEC;
 }
 
-void runTestSuite(TestSuite *suite)
+void runTestSuite(TestSuite *suite, int nb_run_arg, char *run_arg[])
 {
+    if (nb_run_arg > 1 && strcmp(run_arg[1],suite->name) != 0)
+        return;
+
     printf("Test Suite %s (%i tests) -------------------------------\n", suite->name, suite->nb_tests);
 
     unsigned short int tests_in_success = 0;
@@ -50,24 +53,26 @@ void runTestSuite(TestSuite *suite)
 
     TestFunctionNode *current_node = suite->functions.first_node;
     while (current_node != NULL) {
-        runTestFunction(current_node);
-        (current_node->execute && current_node->in_success) ? tests_in_success++ : tests_in_failure++;
-        suite->nb_asserts += current_node->nb_asserts;
-        suite->execution_time += current_node->execution_time;
-        printf(
-            "Run %s (%i asserts) in %f seconds => %s\n",
-            current_node->name,
-            current_node->nb_asserts,
-            current_node->execution_time,
-            (current_node->execute && current_node->in_success) ?
-                ((current_node->nb_asserts == 0) ? "\033[0;33mOK\033[0m" : "\033[0;32mOK\033[0m") :
-                "\033[1;31mKO\033[0m"
-        );
-        TestFunctionAssertNode *current_assert_node = current_node->assert_functions.first_node;
-        while (current_assert_node != NULL) {
-            if (!current_assert_node->in_success)
-                printf(" - \033[1;31m%s\033[0m\n", current_assert_node->error_message);
-            current_assert_node = current_assert_node->next;
+        if (nb_run_arg <= 2 || (nb_run_arg > 2 && strcmp(run_arg[2],current_node->name) == 0)) {
+            runTestFunction(current_node);
+            (current_node->execute && current_node->in_success) ? tests_in_success++ : tests_in_failure++;
+            suite->nb_asserts += current_node->nb_asserts;
+            suite->execution_time += current_node->execution_time;
+            printf(
+                "Run %s (%i asserts) in %f seconds => %s\n",
+                current_node->name,
+                current_node->nb_asserts,
+                current_node->execution_time,
+                (current_node->execute && current_node->in_success) ?
+                    ((current_node->nb_asserts == 0) ? "\033[0;33mOK\033[0m" : "\033[0;32mOK\033[0m") :
+                    "\033[1;31mKO\033[0m"
+            );
+            TestFunctionAssertNode *current_assert_node = current_node->assert_functions.first_node;
+            while (current_assert_node != NULL) {
+                if (!current_assert_node->in_success)
+                    printf(" - \033[1;31m%s\033[0m\n", current_assert_node->error_message);
+                current_assert_node = current_assert_node->next;
+            }
         }
         current_node = current_node->next;
     }
