@@ -1,8 +1,10 @@
 #include "tests.h"
 
+// Test fonctions, remember use assert macro
+
 void test_fake(const void *function_node)
 {
-    // No assert
+    // No assert, warning reporting.
 }
 
 void test_fake_int(const void *function_node)

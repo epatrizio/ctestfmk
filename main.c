@@ -5,19 +5,21 @@
 #include "tests.h"
 
 /*
-main arguments :
+arguments :
  - No : Run all test suites
  - First = Test suite name : To execute a specific test suite
  - Second = Function test name : To execute a specific test suite function
 */
 int main(int argc, char *argv[])
 {
+    // Manual test suites creation
+
     TestSuite *ts_fake_1 = createTestSuite("FAKE 1");
     addTestFunction(ts_fake_1, "fake no assert", test_fake);
     addTestFunction(ts_fake_1, "fake int", test_fake_int);
     addTestFunction(ts_fake_1, "fake double/float", test_fake_double);
     runTestSuite(ts_fake_1, argc, argv);
-    displayTestSuite(ts_fake_1);
+    displayTestSuite(ts_fake_1);    // Optional : to display a detailed state test suite trace
 
     TestSuite *ts_fake_2 = createTestSuite("FAKE 2");
     addTestFunction(ts_fake_2, "fake char", test_fake_char);
