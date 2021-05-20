@@ -2,7 +2,7 @@
 #define TESTS_H
 
 // Import ctestfmk framework
-#include "ctestfmk.h"
+#include "../src/ctestfmk.h"
 
 // Test functions declarations (specific signature defined by the framework)
 void test_fake(const void*);
