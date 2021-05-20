@@ -30,7 +30,7 @@ In the following sections, you will see how to write your tests and then compile
 
 *In the project, you can see a full commented example offering fake test suites.*
 
-# Compiltation
+# Compilation
 
 Last step : compile to execute the tests!
 
