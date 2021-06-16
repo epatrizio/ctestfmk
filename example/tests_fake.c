@@ -9,48 +9,48 @@ void test_fake(const void *function_node)
 
 void test_fake_int(const void *function_node)
 {
-    assert_eaquals_int(2, 2, function_node);
-    assert_eaquals_int(2, 3, function_node);
+    assert_equals_int(2, 2, function_node);
+    assert_equals_int(2, 3, function_node);
 }
 
 void test_fake_double(const void *function_node)
 {
-    assert_eaquals_double(1.1, 1.23, function_node);
-    assert_eaquals_double(222.20, 222.20, function_node);
+    assert_equals_double(1.1, 1.23, function_node);
+    assert_equals_double(222.20, 222.20, function_node);
     double d1 = 2.45;
     double d2 = 12.45;
-    assert_eaquals_double(d1, d2, function_node);
+    assert_equals_double(d1, d2, function_node);
     float f1 = 123.78;
     float f2 = 123.78;
-    assert_eaquals_double(f1, f2, function_node);
+    assert_equals_double(f1, f2, function_node);
 }
 
 void test_fake_char(const void *function_node)
 {
-    assert_eaquals_char('a', 'a', function_node);
-    assert_eaquals_char('a', 'b', function_node);
+    assert_equals_char('a', 'a', function_node);
+    assert_equals_char('a', 'b', function_node);
 }
 
 void test_fake_charp(const void *function_node)
 {
-    assert_eaquals_charp("fake", "fake", function_node);
-    assert_eaquals_charp("fake1", "fake2", function_node);
-    assert_eaquals_charp("fake_fake", "fake", function_node);
-    assert_eaquals_charp("fake", "fake_fake", function_node);
+    assert_equals_charp("fake", "fake", function_node);
+    assert_equals_charp("fake1", "fake2", function_node);
+    assert_equals_charp("fake_fake", "fake", function_node);
+    assert_equals_charp("fake", "fake_fake", function_node);
 
     char *s1 = "fake1";
     char *s2 = "fake2";
     char *s3 = "fake3";
-    assert_eaquals_charp(s1, s2, function_node);
-    assert_eaquals_charp(s1, s3, function_node);
+    assert_equals_charp(s1, s2, function_node);
+    assert_equals_charp(s1, s3, function_node);
 
     char s4[] = "fake4";
     char s5[] = "fake5";
     char s6[] = "fake6";
     char s11[] = "fake1";
-    assert_eaquals_charp(s4, s5, function_node);
-    assert_eaquals_charp(s4, s6, function_node);
-    assert_eaquals_charp(s1, s11, function_node);
+    assert_equals_charp(s4, s5, function_node);
+    assert_equals_charp(s4, s6, function_node);
+    assert_equals_charp(s1, s11, function_node);
 }
 
 void test_fake_bool(const void *function_node)
