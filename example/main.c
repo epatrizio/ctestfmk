@@ -28,6 +28,7 @@ int main(int argc, char *argv[])
 
     TestSuite *ts_fake_3 = createTestSuite("FAKE 3");
     addTestFunction(ts_fake_3, "fake boolean", test_fake_bool);
+    addTestFunction(ts_fake_3, "fake null", test_fake_null);
     runTestSuite(ts_fake_3, argc, argv);
 
     deleteTestSuite(ts_fake_1);

@@ -11,5 +11,6 @@ void test_fake_double(const void*);
 void test_fake_char(const void*);
 void test_fake_charp(const void*);
 void test_fake_bool(const void*);
+void test_fake_null(const void*);
 
 #endif

@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #include "tests.h"
 
 // Test fonctions, remember use assert macro
@@ -68,4 +70,20 @@ void test_fake_bool(const void *function_node)
     assert_false(12 == 12, function_node);
     assert_false('a' == 'a', function_node);
     assert_false(12.0 == 12, function_node);
+}
+
+void test_fake_null(const void *function_node)
+{
+    assert_null(NULL, function_node);
+
+    char *s = NULL;
+    assert_null(s, function_node);
+    s = "not null";
+    assert_null(s, function_node);
+
+    int *ip = NULL;
+    assert_null(ip, function_node);
+    int i = 0;
+    ip = &i;
+    assert_null(ip, function_node);
 }

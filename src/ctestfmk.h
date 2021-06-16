@@ -64,6 +64,7 @@ void assertEqualsChar(char, char, const void*, char*, int);
 void assertEqualsCharP(char*, char*, const void*, char*, int);
 void assertTrue(bool, const void*, char*, int);
 void assertFalse(bool, const void*, char*, int);
+void assertNull(void*, const void*, char*, int);
 
 #define assert_equals_int(expected, actual, function_node) assertEqualsInt(expected, actual, function_node, __FILE__, __LINE__)
 #define assert_equals_double(expected, actual, function_node) assertEqualsDouble(expected, actual, function_node, __FILE__, __LINE__)
@@ -71,5 +72,6 @@ void assertFalse(bool, const void*, char*, int);
 #define assert_equals_charp(expected, actual, function_node) assertEqualsCharP(expected, actual, function_node, __FILE__, __LINE__)
 #define assert_true(actual, function_node) assertTrue(actual, function_node, __FILE__, __LINE__)
 #define assert_false(actual, function_node) assertFalse(actual, function_node, __FILE__, __LINE__)
+#define assert_null(actual, function_node) assertNull(actual, function_node, __FILE__, __LINE__)
 
 #endif

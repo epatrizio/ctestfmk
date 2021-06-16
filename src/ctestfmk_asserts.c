@@ -74,3 +74,12 @@ void assertFalse(bool actual, const void *function_node, char* file, int line)
 
     updateTestFunctionNode(function_node, file, line, !actual, error_message);
 }
+
+void assertNull(void *actual, const void *function_node, char* file, int line)
+{
+    char error_message[ERROR_MESSAGE_MAX_SIZE] = {'\0'};
+    if (actual != NULL)
+        sprintf(error_message, "[error %s:%i] assertNull: Not null return", file, line);
+
+    updateTestFunctionNode(function_node, file, line, !actual, error_message);
+}
